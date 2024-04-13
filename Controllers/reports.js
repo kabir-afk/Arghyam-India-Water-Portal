@@ -3,6 +3,7 @@ const mysql = require("mysql2");
 async function homePage(req, res) {
   res.status(200).json({
     success: true,
+    msg:"Welcome to homepage"
   });
 }
 
