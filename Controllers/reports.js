@@ -9,6 +9,7 @@ function createPool() {
       database: process.env.MYSQL_DATABASE,
     })
     .promise();
+    return pool;
 }
 
 async function homePage(req, res) {
@@ -19,13 +20,13 @@ async function homePage(req, res) {
 }
 
 const allowedTables = [
-  "average_temperature",
-  "cloud_cover",
-  "diurnal_temperature_range",
-  "ground_frost_frequency",
-  "maximum_temperature",
-  "minimum_temperature",
-  "potential_evapotranspiration"
+  "Average_Temperature",
+  "Cloud_Cover",
+  "Diurnal_Temperature_Range",
+  "Ground_Frost_Frequency",
+  "Maximum_Temperature",
+  "Minimum_Temperature",
+  "Potential_Evapotranspiration"
 ];
 
 async function getMonthlyMean(req, res) {
