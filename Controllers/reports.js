@@ -67,29 +67,30 @@ AND year_val BETWEEN ? AND ?;`;
 
 async function getAnnualMean(req, res) {
   try {
-    const pool = mysql
-      .createPool({
-        host: process.env.MYSQL_HOST,
-        user: process.env.MYSQL_USER,
-        password: process.env.MYSQL_PASSWORD,
-        database: process.env.MYSQL_DATABASE,
-      })
-      .promise();
-    const { table, state, district, startYear, endYear } = req.body;
-    if (!allowedTables.includes(table)) {
-      throw new Error("Unauthorized table access");
-    }
-    const sqlValues = [state, district, startYear, endYear];
-    const annualMeanSql = `SELECT
-    *,
-    ROUND(((jan + feb +mar+apr+may+jun+jul+aug+sep+oct+nov+december)/12),2) AS annual_mean
-    FROM ${table} 
-    WHERE State = ? 
-    AND Distict = ?
-    AND year_val BETWEEN ? AND ?;`;
+    // const pool = mysql
+    //   .createPool({
+    //     host: process.env.MYSQL_HOST,
+    //     user: process.env.MYSQL_USER,
+    //     password: process.env.MYSQL_PASSWORD,
+    //     database: process.env.MYSQL_DATABASE,
+    //   })
+    //   .promise();
+    // const { table, state, district, startYear, endYear } = req.body;
+    // if (!allowedTables.includes(table)) {
+    //   throw new Error("Unauthorized table access");
+    // }
+    // const sqlValues = [state, district, startYear, endYear];
+    // const annualMeanSql = `SELECT
+    // *,
+    // ROUND(((jan + feb +mar+apr+may+jun+jul+aug+sep+oct+nov+december)/12),2) AS annual_mean
+    // FROM ${table} 
+    // WHERE State = ? 
+    // AND Distict = ?
+    // AND year_val BETWEEN ? AND ?;`;
 
-    const [annualMean] = await pool.query(annualMeanSql, sqlValues);
-    res.status(201).json({ annualMean });
+    // const [annualMean] = await pool.query(annualMeanSql, sqlValues);
+    // res.status(201).json({ annualMean });
+    res.status(201).json({ msg:"annualMean" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error fetching data" });
