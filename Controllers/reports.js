@@ -1,5 +1,16 @@
 const mysql = require("mysql2");
 
+function createPool() {
+  const pool = mysql
+    .createPool({
+      host: process.env.MYSQL_HOST,
+      user: process.env.MYSQL_USER,
+      password: process.env.MYSQL_PASSWORD,
+      database: process.env.MYSQL_DATABASE,
+    })
+    .promise();
+}
+
 async function homePage(req, res) {
   res.status(200).json({
     success: true,
@@ -18,14 +29,7 @@ const allowedTables = [
 ];
 
 async function getMonthlyMean(req, res) {
-  const pool = mysql
-    .createPool({
-      host: process.env.MYSQL_HOST,
-      user: process.env.MYSQL_USER,
-      password: process.env.MYSQL_PASSWORD,
-      database: process.env.MYSQL_DATABASE,
-    })
-    .promise();
+  const pool  = createPool();
   try {
     const { table, state, district, startYear, endYear } = req.body;
     if (!allowedTables.includes(table)) {
@@ -66,15 +70,8 @@ AND year_val BETWEEN ? AND ?;`;
 }
 
 async function getAnnualMean(req, res) {
+  const pool = createPool();
   try {
-    const pool = mysql
-      .createPool({
-        host: process.env.MYSQL_HOST,
-        user: process.env.MYSQL_USER,
-        password: process.env.MYSQL_PASSWORD,
-        database: process.env.MYSQL_DATABASE,
-      })
-      .promise();
     const { table, state, district, startYear, endYear } = req.body;
     if (!allowedTables.includes(table)) {
       throw new Error("Unauthorized table access");
@@ -96,15 +93,8 @@ async function getAnnualMean(req, res) {
   }
 }
 async function getAnnualTotal(req, res) {
+  const pool = createPool();
   try {
-    const pool = mysql
-      .createPool({
-        host: process.env.MYSQL_HOST,
-        user: process.env.MYSQL_USER,
-        password: process.env.MYSQL_PASSWORD,
-        database: process.env.MYSQL_DATABASE,
-      })
-      .promise();
     const { table, state, district, startYear, endYear } = req.body;
     if (!allowedTables.includes(table)) {
       throw new Error("Unauthorized table access");
