@@ -26,7 +26,10 @@ const allowedTables = [
   "Ground_Frost_Frequency",
   "Maximum_Temperature",
   "Minimum_Temperature",
-  "Potential_Evapotranspiration"
+  "Potential_Evapotranspiration",
+  "Reference_Crop_Evapotranspiration",
+  "Vapour_Pressure",
+  "Wet_Day_Frequency",
 ];
 
 async function getMonthlyMean(req, res) {
