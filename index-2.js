@@ -10,10 +10,12 @@ const PORT = process.env.PORT;
 
 app.use(express.urlencoded({ extended: false }));
 
-app.use(cors({
-  origin: [process.env.FRONTEND_URL],
-  methods: ["GET", "POST", "PUT", "DELETE"],
-}))
+app.use(
+  cors({
+    origin: ["http://localhost:3000/"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  })
+);
 
 app.use("/", router);
 
