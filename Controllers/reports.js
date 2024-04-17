@@ -12,6 +12,8 @@ function createPool() {
     return pool;
 }
 
+createPool();
+
 async function homePage(req, res) {
   res.status(200).json({
     success: true,
@@ -32,8 +34,7 @@ const allowedTables = [
   "Wet_Day_Frequency",
 ];
 
-async function getMonthlyMean(req, res) {
-  const pool  = createPool();
+async function getMonthlyMean(req, res,pool) {
   try {
     const { table, state, district, startYear, endYear } = req.body;
     if (!allowedTables.includes(table)) {
@@ -73,8 +74,7 @@ AND year_val BETWEEN ? AND ?;`;
   }
 }
 
-async function getAnnualMean(req, res) {
-  const pool = createPool();
+async function getAnnualMean(req, res,pool) {
   try {
     const { table, state, district, startYear, endYear } = req.body;
     if (!allowedTables.includes(table)) {
@@ -96,8 +96,7 @@ async function getAnnualMean(req, res) {
     res.status(500).json({ message: "Error fetching data" });
   }
 }
-async function getAnnualTotal(req, res) {
-  const pool = createPool();
+async function getAnnualTotal(req, res,pool) {
   try {
     const { table, state, district, startYear, endYear } = req.body;
     if (!allowedTables.includes(table)) {
