@@ -23,6 +23,7 @@ async function homePage(req, res) {
 }
 
 const allowedTables = [
+  "Precipitation",
   "Average_Temperature",
   "Cloud_Cover",
   "Diurnal_Temperature_Range",
