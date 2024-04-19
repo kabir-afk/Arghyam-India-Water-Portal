@@ -111,7 +111,7 @@ async function getAnnualTotal(req, res) {
     const sqlValues = [state, district, startYear, endYear];
     const annualTotalSql = `SELECT
     *,
-    ROUND((jan + feb +mar+apr+may+jun+jul+aug+sep+oct+nov+december),2) AS annual_mean
+    ROUND((jan + feb +mar+apr+may+jun+jul+aug+sep+oct+nov+december),2) AS annual_totals
     FROM ${table} 
     WHERE State = ? 
     AND Distict = ?
